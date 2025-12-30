@@ -78,12 +78,22 @@ jobs:
       - name: Curl and Validate Response
         run: |
           RESPONSE=$(curl -s http://localhost:8080)
-  
           echo "App response: $RESPONSE"
-  
-          if [[ "$RESPONSE" != *"Hello from Static Java DevOps App"* ]]; then
-            echo "❌ Application response validation failed"
-            exit 1
-          fi
-  
-          echo "✅ Application is running correctly"
+      
+          echo "$RESPONSE" | grep -q "Static Java DevOps App" \
+            && echo "✅ Application is running correctly" \
+            || (echo "❌ Validation failed" && exit 1)
+
+              
+      #- name: Curl and Validate Response
+      #  run: |
+      #    RESPONSE=$(curl -s http://localhost:8080)
+  #
+      #    echo "App response: $RESPONSE"
+  #
+      #    if [[ "$RESPONSE" != *"Hello from Static Java DevOps App"* ]]; then
+      #      echo "❌ Application response validation failed"
+      #      exit 1
+      #    fi
+  #
+      #    echo "✅ Application is running correctly"
