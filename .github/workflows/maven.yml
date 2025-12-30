@@ -74,3 +74,16 @@ jobs:
         run: |
           sleep 10
           docker ps
+
+      - name: Curl and Validate Response
+        run: |
+          RESPONSE=$(curl -s http://localhost:8080)
+  
+          echo "App response: $RESPONSE"
+  
+          if [[ "$RESPONSE" != *"Hello from Static Java DevOps App"* ]]; then
+            echo "❌ Application response validation failed"
+            exit 1
+          fi
+  
+          echo "✅ Application is running correctly"
