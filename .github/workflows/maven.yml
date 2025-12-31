@@ -68,7 +68,7 @@ jobs:
           docker build \
             -t larasai/static-java-devops-app:${{ github.run_number }} \
             -t ghcr.io/${{ github.repository }}/static-java-devops-app:${{ github.run_number }} \
-            -t ghcr.io/${{ github.repository }}/static-java-devops-app:latest .
+            -t ghcr.io/${{ github.repository }}/static-java-devops-app:${{ github.run_number }} .
 
       # 🔹 Push to Docker Hub
       - name: Push to Docker Hub
@@ -79,7 +79,7 @@ jobs:
       - name: Push to GHCR
         run: |
           docker push ghcr.io/${{ github.repository }}/static-java-devops-app:${{ github.run_number }}
-          docker push ghcr.io/${{ github.repository }}/static-java-devops-app:latest
+          docker push ghcr.io/${{ github.repository }}/static-java-devops-app:${{ github.run_number }}
 
   deploy:
     runs-on: ubuntu-latest
